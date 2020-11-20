@@ -9,26 +9,25 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.musicplayer.data.room.entities.Music;
+import com.example.musicplayer.data.room.entities.User;
 
 import java.util.List;
 
 @Dao
-public interface MusicDao {
+public interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertMusics(Music... musics);
+    void insertUsers(User... users);
 
     @Update
-    void updateMusic (Music music);
+    void updateUser(User user);
 
     @Delete
-    void deleteMusic (Music music);
+    void deleteUser (User user);
 
-    @Query("select * from musicTable")
-    LiveData<List<Music>> getMusicsList();
+    @Query("select * from userTable")
+    LiveData<List<User>> getUserList();
 
-    @Query("select * from musicTable where id= :idMusic")
-    LiveData<Music> getMusic (int idMusic);
-
-
+    @Query("select * from userTable where userId= :idUser")
+    LiveData<User> getUser (int idUser);
 }
