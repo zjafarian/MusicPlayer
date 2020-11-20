@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicPlayer">
-        <activity android:name=".MusicPlayerActivity">
+        <activity android:name=".view.activity.ListMusicsActivity"></activity>
+        <activity android:name=".view.activity.ListArtistsActivity" />
+        <activity android:name=".view.activity.ListAlbumsActivity" />
+        <activity android:name=".view.activity.MusicPagerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

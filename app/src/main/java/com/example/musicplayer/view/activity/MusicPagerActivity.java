@@ -1,14 +1,16 @@
-package com.example.musicplayer;
+package com.example.musicplayer.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MusicPlayerActivity extends AppCompatActivity {
+import com.example.musicplayer.R;
+
+public class MusicPagerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_music_pager);
     }
 }
