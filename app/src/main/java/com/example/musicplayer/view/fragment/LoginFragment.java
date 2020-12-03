@@ -1,17 +1,22 @@
 package com.example.musicplayer.view.fragment;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.musicplayer.R;
+import com.example.musicplayer.databinding.FragmentLoginBinding;
+import com.example.musicplayer.viewmodel.LoginViewModel;
 
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends DialogFragment {
+    private FragmentLoginBinding mBinding;
+    private LoginViewModel mLoginViewModel;
 
 
     public LoginFragment() {
@@ -29,13 +34,29 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLoginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
+
 
     }
 
+    @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        mBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_login,
+                null,
+                false);
+        setVariableBinding();
+
+        return new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.login_dialog)
+                .setView(mBinding.getRoot())
+                .create();
+    }
+
+    private void setVariableBinding() {
+        mBinding.setLoginViewModel(mLoginViewModel);
+        mBinding.setLoginFragment(this);
     }
 }

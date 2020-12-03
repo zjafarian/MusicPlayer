@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.musicplayer.R;
-import com.example.musicplayer.view.fragment.ListArtictsFragment;
+import com.example.musicplayer.view.fragment.ListArtistsFragment;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ public class ListArtistsActivity extends SingleFragmentActivity {
 
     @Override
     public Fragment createFragment() {
-        ListArtictsFragment listArtictsFragment = ListArtictsFragment.newInstance();
+        ListArtistsFragment listArtictsFragment = ListArtistsFragment.newInstance();
         return listArtictsFragment;
     }
 

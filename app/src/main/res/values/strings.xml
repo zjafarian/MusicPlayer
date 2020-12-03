@@ -11,5 +11,13 @@
     <string name="username">UserName</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="sign_up_dialog">SignUp MusicPlayer</string>
+    <string name="message_null_username_or_password">UserName or Password are Empty</string>
+    <string name="login_dialog">Login MusicPlayer</string>
+    <string name="message_wrong_username_or_password">UserName or Password is Wrong</string>
+    <string name="or">or</string>
+    <string name="user_is_login">%s is Login</string>
+    <string name="gone_view">gone</string>
+    <string name="visible_view">visible</string>
 
 </resources>

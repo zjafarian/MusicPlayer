@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <variable
+            name="loginSignUpViewModel"
+            type="com.example.musicplayer.viewmodel.LoginSignUpViewModel" />
+        <variable
+            name="loginSignUpFragment"
+            type="com.example.musicplayer.view.fragment.LoginSignUpFragment" />
+
+        <variable
+            name="loginViewModel"
+            type="com.example.musicplayer.viewmodel.LoginViewModel" />
+
+        <import type="android.view.View"/>
 
     </data>
 
     <FrameLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
@@ -20,8 +32,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="120dp"
             android:text="@string/description_login_or_sing_up_one"
+            android:visibility="@{loginViewModel.checkLogin ? View.GONE : View.VISIBLE}"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -32,8 +45,9 @@
             android:layout_marginTop="150dp"
             android:text="@string/description_login_or_sing_up_two"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="@{loginViewModel.checkLogin ? View.GONE : View.VISIBLE}"/>
 
         <TextView
             android:id="@+id/textView3"
@@ -43,28 +57,69 @@
             android:layout_marginTop="180dp"
             android:text="@string/description_login_or_sing_up_three"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="@{loginViewModel.checkLogin ? View.GONE : View.VISIBLE}"/>
 
         <Button
             android:id="@+id/btn_choose_login"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:onClick="@{()->loginSignUpViewModel.onClickLogin(loginSignUpFragment)}"
             android:text="@string/choose_login"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            app:backgroundTint="@color/orange_light" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/orange_light"
+            android:visibility="@{loginViewModel.checkLogin ? View.GONE : View.VISIBLE}"/>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="@string/or"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:visibility="@{loginViewModel.checkLogin ? View.GONE : View.VISIBLE}"/>
 
         <Button
             android:id="@+id/btn_choose_sing_up"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="100dp"
+            android:onClick="@{()->loginSignUpViewModel.onClickSignUp(loginSignUpFragment)}"
             android:text="@string/choose_sing_up"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="@{loginViewModel.checkLogin ? View.GONE : View.VISIBLE}"/>
+
+        <TextView
+            android:id="@+id/text_view_user_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="250dp"
+            android:gravity="center"
+            android:text="@string/user_is_login"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="@{loginViewModel.checkLogin ? View.VISIBLE : View.GONE}"  />
+
+        <ImageButton
+            android:id="@+id/img_btn_logout"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_gravity="center"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:scaleType="fitXY"
+            android:visibility="@{loginViewModel.checkLogin ? View.VISIBLE : View.GONE}"
+            app:srcCompat="@drawable/ic_logout" />
 
     </FrameLayout>
 

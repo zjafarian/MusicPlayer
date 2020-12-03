@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
+        <variable
+            name="loginViewModel"
+            type="com.example.musicplayer.viewmodel.LoginViewModel" />
+
+        <variable
+            name="loginFragment"
+            type="com.example.musicplayer.view.fragment.LoginFragment" />
 
     </data>
 
     <FrameLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         tools:context=".view.fragment.LoginFragment">
 
         <EditText
-            android:id="@+id/text_plain_user_name"
+            android:id="@+id/text_plain_user_name_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/username"
-            android:inputType="textPersonName"
+            android:onTextChanged="@{loginViewModel::onTextChangedUserName}"
             android:textColorHint="@color/orange_light" />
+
 
         <EditText
             android:id="@+id/text_plain_password_login"
@@ -28,8 +40,9 @@
             android:layout_marginTop="45dp"
             android:ems="10"
             android:hint="@string/password"
-            android:inputType="textPersonName"
+            android:onTextChanged="@{loginViewModel::onTextChangedPassword}"
             android:textColorHint="@color/orange_light" />
+
 
         <Button
             android:id="@+id/btn_login"
@@ -37,12 +50,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp"
+            android:onClick="@{() -> loginViewModel.onClickListener(loginFragment)}"
             android:text="@string/login"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
+
     </FrameLayout>
-
-
 </layout>
+

@@ -25,10 +25,10 @@ public interface MusicDao {
     void deleteMusic (Music music);
 
     @Query("select * from musicTable")
-    LiveData<List<Music>> getMusicsList();
+    List<Music> getMusicsList();
 
     @Query("select * from musicTable where id= :idMusic")
-    LiveData<Music> getMusic (int idMusic);
+    Music getMusic (int idMusic);
 
 
 }

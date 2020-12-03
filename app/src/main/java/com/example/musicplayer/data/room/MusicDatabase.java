@@ -5,7 +5,9 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
+import com.example.musicplayer.data.room.dao.Converters;
 import com.example.musicplayer.data.room.dao.MusicDao;
 import com.example.musicplayer.data.room.dao.UserDao;
 import com.example.musicplayer.data.room.entities.Music;
@@ -17,6 +19,7 @@ import java.util.concurrent.Executors;
 @Database(entities = {Music.class, User.class},
         version = 1,
         exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class MusicDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "music_player.db";
@@ -33,7 +36,7 @@ public abstract class MusicDatabase extends RoomDatabase {
                 context.getApplicationContext(),
                 MusicDatabase.class,
                 MusicDatabase.DATABASE_NAME
-        ).build();
+        ).allowMainThreadQueries().build();
     }
 
 

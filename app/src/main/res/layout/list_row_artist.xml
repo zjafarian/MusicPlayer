@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="listAlbumsViewModel"
+            type="com.example.musicplayer.viewmodel.ListAlbumsViewModel" />
+        <variable
+            name="position"
+            type="Integer" />
 
     </data>
     <RelativeLayout
@@ -8,7 +16,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:onClick="@{()-> listAlbumsViewModel.onClickListItem(position)}">
 
         <ImageView
             android:id="@+id/img_view_artist"
@@ -30,7 +39,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Singer's Name"
+            tools:text="@{listAlbumsViewModel.musicsLiveData.get(position).musicArtist}"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@+id/img_view_artist" />
 

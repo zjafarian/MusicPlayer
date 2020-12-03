@@ -16,8 +16,8 @@ import java.util.List;
 @Dao
 public interface UserDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertUsers(User... users);
+    @Insert
+    void insertUser(User user);
 
     @Update
     void updateUser(User user);
@@ -26,8 +26,8 @@ public interface UserDao {
     void deleteUser (User user);
 
     @Query("select * from userTable")
-    LiveData<List<User>> getUserList();
+    List<User> getUserList();
 
     @Query("select * from userTable where userId= :idUser")
-    LiveData<User> getUser (int idUser);
+    User getUser (int idUser);
 }

@@ -24,7 +24,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this, getLayoutResId());
+        //mBinding = DataBindingUtil.setContentView(this, getLayoutResId());
+        setContentView(R.layout.activity_single_fragment);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -33,6 +34,11 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
             fragmentManager
                     .beginTransaction()
                     .add(R.id.fragment_container, createFragment(), FRAGMENT_TAG)
+                    .commit();
+        } else {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, createFragment(), FRAGMENT_TAG)
                     .commit();
         }
     }

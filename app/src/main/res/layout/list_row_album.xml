@@ -2,6 +2,14 @@
 <layout>
 
     <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="listAlbumsViewModel"
+            type="com.example.musicplayer.viewmodel.ListAlbumsViewModel" />
+        <variable
+            name="position"
+            type="Integer" />
 
     </data>
 
@@ -11,7 +19,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:onClick="@{()->listAlbumsViewModel.onClickListItem(position)}">
 
 
         <ImageView
@@ -36,7 +45,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Album's Name" />
+            tools:text="@{listAlbumsViewModel.musicsLiveData.get(position).musicAlbum}" />
 
         <View
             android:id="@+id/divider"

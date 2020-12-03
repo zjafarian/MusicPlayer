@@ -1,19 +1,22 @@
 package com.example.musicplayer.data.room.entities;
 
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "musicTable")
 public class Music {
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
+
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    private int mIdMusic;
-    
-    @ForeignKey(entity = User.class, parentColumns ="userId" , childColumns = "userId")
+    private long mIdMusic;
+
+    @ForeignKey(entity = User.class, parentColumns = "userId", childColumns = "userId")
     @ColumnInfo(name = "idUser")
     private int mIdUser;
 
@@ -29,28 +32,37 @@ public class Music {
     @ColumnInfo(name = "duration")
     private long mDuration;
 
+    @ColumnInfo(name = "uri")
+    private Uri mUriMusic;
+
+    @ColumnInfo(name = "albumArt")
+    private String mAlbumArt;
+
+    @ColumnInfo(name = "filePath")
+    private String mPathFile;
+
+
+
     public Music() {
         mMusicTitle = "";
         mMusicAlbum = "";
         mMusicArtist = "";
         mDuration = 0;
+        mIdMusic = 0;
+        mAlbumArt = "";
     }
 
-    public Music(int idMusic, String musicTitle, String musicAlbum, String musicArtist,
-                 long duration, int userId) {
+    @Ignore
+    public Music(long idMusic, Uri uriMusic) {
         mIdMusic = idMusic;
-        mMusicTitle = musicTitle;
-        mMusicAlbum = musicAlbum;
-        mMusicArtist = musicArtist;
-        mDuration = duration;
-        mIdUser = userId;
+        mUriMusic = uriMusic;
     }
 
-    public int getIdMusic() {
+    public long getIdMusic() {
         return mIdMusic;
     }
 
-    public void setIdMusic(int idMusic) {
+    public void setIdMusic(long idMusic) {
         mIdMusic = idMusic;
     }
 
@@ -92,5 +104,29 @@ public class Music {
 
     public void setIdUser(int idUser) {
         mIdUser = idUser;
+    }
+
+    public Uri getUriMusic() {
+        return mUriMusic;
+    }
+
+    public void setUriMusic(Uri uriMusic) {
+        mUriMusic = uriMusic;
+    }
+
+    public String getAlbumArt() {
+        return mAlbumArt;
+    }
+
+    public void setAlbumArt(String albumArt) {
+        mAlbumArt = albumArt;
+    }
+
+    public String getPathFile() {
+        return mPathFile;
+    }
+
+    public void setPathFile(String pathFile) {
+        mPathFile = pathFile;
     }
 }

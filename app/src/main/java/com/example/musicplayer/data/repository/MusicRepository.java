@@ -1,7 +1,9 @@
 package com.example.musicplayer.data.repository;
 
 import android.content.Context;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 import androidx.lifecycle.LiveData;
 
 import com.example.musicplayer.data.room.MusicDatabase;
@@ -9,6 +11,7 @@ import com.example.musicplayer.data.room.dao.MusicDao;
 import com.example.musicplayer.data.room.dao.UserDao;
 import com.example.musicplayer.data.room.entities.Music;
 import com.example.musicplayer.data.room.entities.User;
+import com.example.musicplayer.utilities.MusicUtils;
 
 import java.io.File;
 import java.util.List;
@@ -20,15 +23,22 @@ public class MusicRepository {
     private Context mContext;
     private MusicDao mMusicDao;
     private UserDao mUserDao;
+    private List<Music> mMusicList;
+
 
     private MusicRepository(Context context) {
-        mContext = context;
+        mContext = context.getApplicationContext();
 
         MusicDatabase musicDatabase = MusicDatabase.getDatabase(mContext);
         mMusicDao = musicDatabase.getMusicDao();
         mUserDao = musicDatabase.getUserDao();
+        MusicUtils musicUtils = new MusicUtils(mContext);
+        mMusicList = musicUtils.getMusicList();
+        insertMusics();
+
 
     }
+
 
     public static synchronized MusicRepository getInstance(Context context) {
         if (sInstance == null)
@@ -39,11 +49,9 @@ public class MusicRepository {
 
     //get data from music table
 
-    public LiveData<List<Music>> getMusicsLiveData() {
-        return mMusicDao.getMusicsList();
-    }
 
-    public LiveData<Music> getMusicLiveData(int id) {
+
+    public Music getMusic(int id) {
         return mMusicDao.getMusic(id);
     }
 
@@ -55,15 +63,19 @@ public class MusicRepository {
         MusicDatabase.dataBaseWriteExecutor.execute(()-> mMusicDao.deleteMusic(music));
     }
 
+    public List<Music> getMusicList (){
+        return mMusicDao.getMusicsList();
+    }
+
     public void insertMusic(Music music) {
         MusicDatabase.dataBaseWriteExecutor.execute(()-> mMusicDao.insertMusics(music));
     }
 
-    public void insertMusics(List<Music> list) {
+    public void insertMusics() {
         MusicDatabase.dataBaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                mMusicDao.insertMusics(list.toArray(new Music[]{}));
+                mMusicDao.insertMusics(mMusicList.toArray(new Music[]{}));
             }
         });
     }
@@ -72,11 +84,11 @@ public class MusicRepository {
     // get data from user table
 
 
-    public LiveData<List<User>> getUsersLiveData() {
+    public List<User> getUsers() {
         return mUserDao.getUserList();
     }
 
-    public LiveData<User> getUserLiveData(int id) {
+    public User getUser(int id) {
         return mUserDao.getUser(id);
     }
 
@@ -89,16 +101,16 @@ public class MusicRepository {
     }
 
     public void insertUser(User user) {
-        MusicDatabase.dataBaseWriteExecutor.execute(()-> mUserDao.insertUsers(user));
+        MusicDatabase.dataBaseWriteExecutor.execute(()-> mUserDao.insertUser(user));
     }
 
-    public void insertUsers(List<User> list) {
+   /* public void insertUsers(List<User> list) {
         MusicDatabase.dataBaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 mUserDao.insertUsers(list.toArray(new User[]{}));
             }
         });
-    }
+    }*/
 
 }

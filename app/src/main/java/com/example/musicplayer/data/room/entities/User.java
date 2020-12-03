@@ -3,6 +3,7 @@ package com.example.musicplayer.data.room.entities;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "userTable")
@@ -19,6 +20,7 @@ public class User {
     @ColumnInfo(name = "password")
     private String mPassword;
 
+    @Ignore
     public User() {
         mUserName = "";
         mPassword = "";
