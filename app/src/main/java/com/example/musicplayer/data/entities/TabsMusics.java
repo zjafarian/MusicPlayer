@@ -1,4 +1,4 @@
-package com.example.musicplayer.data.room.entities;
+package com.example.musicplayer.data.entities;
 
 public enum TabsMusics {
     Albums, Artists, Musics;

@@ -19,5 +19,6 @@
     <string name="user_is_login">%s is Login</string>
     <string name="gone_view">gone</string>
     <string name="visible_view">visible</string>
+    <string name="notification_channel_id">channel_id</string>
 
 </resources>

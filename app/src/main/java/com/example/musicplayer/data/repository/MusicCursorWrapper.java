@@ -5,7 +5,7 @@ import android.database.CursorWrapper;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.example.musicplayer.data.room.entities.Music;
+import com.example.musicplayer.data.entities.Music;
 
 public class MusicCursorWrapper extends CursorWrapper {
 
@@ -19,15 +19,23 @@ public class MusicCursorWrapper extends CursorWrapper {
         String  pathFile = getString(getColumnIndex(MediaStore.Audio.Media.DATA));
         String title = getString(getColumnIndex(MediaStore.Audio.Media.TITLE));
         String artist =getString(getColumnIndex(MediaStore.Audio.Media.ARTIST));
+        String artistId = getString(getColumnIndex(MediaStore.Audio.Media.ARTIST_ID));
+        String artistKey = getString(getColumnIndex(MediaStore.Audio.Media.ARTIST_KEY));
         String album = getString(getColumnIndex(MediaStore.Audio.Media.ALBUM));
+        String albumId = getString(getColumnIndex(MediaStore.Audio.Media.ALBUM_ID));
+        String albumKey = getString(getColumnIndex(MediaStore.Audio.Media.ALBUM_KEY));
         long duration = getInt(getColumnIndex(MediaStore.Audio.Media.DURATION));
 
         Music music = new Music(id,pathMusic);
         music.setMusicTitle(title);
-        music.setAlbumArt(album);
+        music.setMusicAlbum(album);
+        music.setAlbumIdMusic(albumId);
+        music.setAlbumKeyMusic(albumKey);
         music.setMusicArtist(artist);
-        music.setDuration(duration);
-        music.setPathFile(pathFile);
+        music.setArtistIdMusic(artistId);
+        music.setArtistKeyMusic(artistKey);
+        music.setDurationMusic(duration);
+        music.setPathFileMusic(pathFile);
 
         return music;
     }

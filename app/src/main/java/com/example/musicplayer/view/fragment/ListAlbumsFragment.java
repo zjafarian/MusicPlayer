@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -14,16 +13,13 @@ import android.view.ViewGroup;
 
 import com.example.musicplayer.R;
 import com.example.musicplayer.adapters.ListAlbumsAdapter;
-import com.example.musicplayer.data.room.entities.Music;
 import com.example.musicplayer.databinding.FragmentListAlbumsBinding;
-import com.example.musicplayer.viewmodel.ListAlbumsViewModel;
-
-import java.util.List;
+import com.example.musicplayer.viewmodel.ListAlbumsArtistsViewModel;
 
 
 public class ListAlbumsFragment extends Fragment {
     private FragmentListAlbumsBinding mBinding;
-    private ListAlbumsViewModel mListAlbumsViewModel;
+    private ListAlbumsArtistsViewModel mListAlbumsArtistsViewModel;
     private ListAlbumsAdapter mAdapterAlbums;
 
 
@@ -43,21 +39,8 @@ public class ListAlbumsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mListAlbumsViewModel = new ViewModelProvider
-                (requireActivity()).get(ListAlbumsViewModel.class);
-
-
-     /*   mListAlbumsViewModel.getMusicsLiveData().observe(this, new Observer<List<Music>>() {
-            @Override
-            public void onChanged(List<Music> musicList) {
-                mListAlbumsViewModel.setMusicList(musicList);
-                updateUI();
-            }
-        });*/
-
-
-
-
+        mListAlbumsArtistsViewModel = new ViewModelProvider
+                (requireActivity()).get(ListAlbumsArtistsViewModel.class);
     }
 
     @Override
@@ -65,25 +48,24 @@ public class ListAlbumsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-
         mBinding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_list_albums,
                 container,
                 false);
-
         mBinding.recycleViewAlbums.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
-
+        updateUI();
         return mBinding.getRoot();
     }
 
     public void updateUI() {
-        if (mAdapterAlbums == null){
-            mAdapterAlbums = new ListAlbumsAdapter(this, mListAlbumsViewModel);
+        if (mAdapterAlbums == null) {
+            mAdapterAlbums = new ListAlbumsAdapter(getActivity(), this,
+                    mListAlbumsArtistsViewModel);
+
             mBinding.recycleViewAlbums.setAdapter(mAdapterAlbums);
         } else {
-            mAdapterAlbums.notifyDataSetChanged();
+            mListAlbumsArtistsViewModel.updateUIAlbum();
         }
     }
 }

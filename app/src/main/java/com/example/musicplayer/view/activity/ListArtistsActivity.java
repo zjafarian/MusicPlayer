@@ -1,10 +1,8 @@
 package com.example.musicplayer.view.activity;
 
 import androidx.fragment.app.Fragment;
-
 import android.content.Context;
 import android.content.Intent;
-
 import com.example.musicplayer.R;
 import com.example.musicplayer.view.fragment.ListArtistsFragment;
 

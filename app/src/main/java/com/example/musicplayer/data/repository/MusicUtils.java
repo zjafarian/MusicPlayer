@@ -1,20 +1,15 @@
-package com.example.musicplayer.utilities;
+package com.example.musicplayer.data.repository;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
 import com.example.musicplayer.data.repository.MusicCursorWrapper;
-import com.example.musicplayer.data.room.entities.Music;
+import com.example.musicplayer.data.entities.Music;
 
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +18,6 @@ public class MusicUtils {
     private Context mContext;
     private final Uri albumArtUri = Uri.parse("content://media/external/audio/albumart");
     private List<Music> mMusicList = new ArrayList<>();
-
-
-    private String[] mediaStoreData = {
-            MediaStore.Audio.Media._ID,
-            MediaStore.Audio.Media.TITLE,
-            MediaStore.Audio.Media.ARTIST,
-            MediaStore.Audio.Media.DURATION,
-            MediaStore.Audio.Media.DATA,
-            MediaStore.Audio.Media.ALBUM,
-            MediaStore.Audio.Media.ALBUM_ID};
-
 
     public MusicUtils(Context context) {
         mContext = context.getApplicationContext();

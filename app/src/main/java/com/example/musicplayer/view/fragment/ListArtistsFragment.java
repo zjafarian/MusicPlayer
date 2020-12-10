@@ -12,15 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.musicplayer.R;
-import com.example.musicplayer.adapters.ListAlbumsAdapter;
 import com.example.musicplayer.adapters.ListArtistsAdapter;
 import com.example.musicplayer.databinding.FragmentListArtistsBinding;
-import com.example.musicplayer.viewmodel.ListAlbumsViewModel;
+import com.example.musicplayer.viewmodel.ListAlbumsArtistsViewModel;
 
 
 public class ListArtistsFragment extends Fragment {
     private FragmentListArtistsBinding mBinding;
-    private ListAlbumsViewModel mListAlbumsViewModel;
+    private ListAlbumsArtistsViewModel mListAlbumsArtistsViewModel;
     private ListArtistsAdapter mArtistsAdapter;
 
 
@@ -41,8 +40,9 @@ public class ListArtistsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mListAlbumsViewModel = new ViewModelProvider
-                (requireActivity()).get(ListAlbumsViewModel.class);
+        mListAlbumsArtistsViewModel = new ViewModelProvider
+                (requireActivity()).get(ListAlbumsArtistsViewModel.class);
+
 
     }
 
@@ -63,10 +63,11 @@ public class ListArtistsFragment extends Fragment {
 
     public void updateUI() {
         if (mArtistsAdapter == null){
-            mArtistsAdapter = new ListArtistsAdapter(this,mListAlbumsViewModel);
+            mArtistsAdapter = new ListArtistsAdapter(getActivity(),this,
+                    mListAlbumsArtistsViewModel);
             mBinding.recycleViewArtists.setAdapter(mArtistsAdapter);
         } else {
-            mArtistsAdapter.notifyDataSetChanged();
+            mListAlbumsArtistsViewModel.updateUIArtist();
         }
 
     }

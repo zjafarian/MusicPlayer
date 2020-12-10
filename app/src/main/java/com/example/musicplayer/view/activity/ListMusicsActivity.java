@@ -1,28 +1,34 @@
 package com.example.musicplayer.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
+import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-
 import com.example.musicplayer.R;
 import com.example.musicplayer.view.fragment.ListMusicsFragment;
 
-import java.util.UUID;
 
 public class ListMusicsActivity extends SingleFragmentActivity{
 
-    public static Intent newIntent(Context context, UUID id) {
+    public static final String EXTRA_NAME_TAB = "com.example.musicplayer.nameTab";
+    public static final String EXTRA_NAME_ARTIST_OR_ALBUM = "com.example.musicplayer.nameArtistOrAlbum";
+
+    public static Intent newIntent
+            (Context context, String nameTab, String nameArtistOrAlbum) {
         Intent intent = new Intent(context, ListMusicsActivity.class);
+        intent.putExtra(EXTRA_NAME_TAB,nameTab);
+        intent.putExtra(EXTRA_NAME_ARTIST_OR_ALBUM,nameArtistOrAlbum);
         return intent;
     }
 
 
     @Override
     public Fragment createFragment() {
-        ListMusicsFragment listMusicsFragment = ListMusicsFragment.newInstance();
+        String nameTab = getIntent().getStringExtra(EXTRA_NAME_TAB);
+        String nameArtistOrAlbum = getIntent().getStringExtra(EXTRA_NAME_ARTIST_OR_ALBUM);
+
+        ListMusicsFragment listMusicsFragment =
+                ListMusicsFragment.newInstance(nameTab,nameArtistOrAlbum);
         return listMusicsFragment;
     }
 

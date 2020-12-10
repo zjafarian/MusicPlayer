@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
 
     </data>
+
     <RelativeLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/row_music"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
 
@@ -19,21 +22,21 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/ic_music" />
+            android:src="@drawable/ic_music" />
 
         <TextView
             android:id="@+id/text_view_music"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="25dp"
+            android:layout_toEndOf="@+id/img_view_music"
             android:layout_toRightOf="@+id/img_view_music"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Music's Name"
-            android:layout_toEndOf="@+id/img_view_music"
-            android:layout_marginStart="5dp" />
+            tools:text="Music Title" />
 
         <View
             android:id="@+id/divider3"

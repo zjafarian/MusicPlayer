@@ -1,14 +1,9 @@
 package com.example.musicplayer.view.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-
 import com.example.musicplayer.R;
-import com.example.musicplayer.view.activity.SingleFragmentActivity;
 import com.example.musicplayer.view.fragment.ListAlbumsFragment;
 
 import java.util.UUID;

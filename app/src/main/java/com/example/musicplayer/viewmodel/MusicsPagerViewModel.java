@@ -8,55 +8,46 @@ import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.lifecycle.LiveData;
 
-import com.example.musicplayer.view.activity.LoginSignUpActivity;
+import com.example.musicplayer.adapters.MusicPagerAdapter;
+import com.example.musicplayer.data.repository.MusicRepository;
+import com.example.musicplayer.data.entities.Music;
 import com.example.musicplayer.view.activity.MusicPagerActivity;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.List;
 
 
 public class MusicsPagerViewModel extends AndroidViewModel {
 
+    private MusicPagerAdapter mMusicPagerAdapter;
+    private Context mContext;
+    private MusicRepository mRepository;
+    private boolean mCheckLogin;
+
     public MusicsPagerViewModel(@NonNull Application application) {
         super(application);
-
+        mContext = application.getApplicationContext();
+        mRepository = MusicRepository.getInstance(mContext);
     }
 
-    public void createIntentForLoginSignUpPage (Activity activity){
-        Intent intent = LoginSignUpActivity.newIntent(activity);
-        activity.startActivityForResult(intent, MusicPagerActivity.REQUEST_CODE_LOGIN_SIGN_UP);
+    public MusicPagerAdapter getMusicPagerAdapter() {
+        return mMusicPagerAdapter;
     }
 
-
-    public void setListMusicsUser(int userId){
-
+    public void setMusicPagerAdapter(MusicPagerAdapter musicPagerAdapter) {
+        mMusicPagerAdapter = musicPagerAdapter;
     }
 
-    /*public void setListTask() {
-        if (mAdapter == null) {
-            mViewPager.setAdapter(createCardAdapter());
-            new TabLayoutMediator(mTabLayout, mViewPager,
-                    new TabLayoutMediator.TabConfigurationStrategy() {
-                        @Override
-                        public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                            String nameTab = String.valueOf(mStates.get(position));
-                            tab.setText(nameTab);
-                        }
-                    }).attach();
-
-        } else {
-            mAdapter.notifyDataSetChanged();
+    public void updateUI(){
+        if (mMusicPagerAdapter!=null){
+            mMusicPagerAdapter.notifyDataSetChanged();
         }
-
     }
 
-    private void setUI(int position) {
-        FragmentStateAdapter adapter =
-                new CrimeViewPagerAdapter(this, mCrimeListViewModel);
-        mBinding.crimeViewPager.setAdapter(adapter);
 
-        //this method "must" be placed after setAdapter.
-        mBinding.crimeViewPager.setCurrentItem(position);
-    }*/
+
+
+
+
 }
